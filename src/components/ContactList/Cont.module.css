@@ -1,0 +1,33 @@
+.contacts {
+  display: flex;
+  margin: 30px;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.contact {
+  border: 2px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  gap: 50px;
+  p {
+    margin: 10px;
+    margin-right: auto;
+    font-weight: bold;
+  }
+  button {
+    display: flex;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: rgb(197, 195, 195);
+  }
+}
+.icon {
+  margin-right: 10px;
+}
