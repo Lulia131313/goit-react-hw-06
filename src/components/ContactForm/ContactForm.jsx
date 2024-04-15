@@ -1,5 +1,5 @@
 import s from "./Contact.module.css";
-import { useId } from "react";
+import { nanoid } from "nanoid";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
@@ -21,12 +21,9 @@ const initialValues = {
 };
 
 const ContactForm = ({ addContacts }) => {
-  const nameFieldId = useId();
-  const numberFieldId = useId();
-
   const handleSubmit = (values, actions) => {
-    addContacts({ ...values });
-
+    const newContact = { ...values, id: nanoid() };
+    addContacts(newContact);
     actions.resetForm();
   };
 
@@ -36,33 +33,29 @@ const ContactForm = ({ addContacts }) => {
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
-      <Form className={s.form}>
-        <div>
-          <label className={s.label} htmlFor={nameFieldId}>
-            Name
-          </label>
-          <Field className={s.input} type="text" name="name" id={nameFieldId} />
-          <ErrorMessage name="name" as="span" />
-        </div>
+      {({ errors, touched }) => (
+        <Form className={s.form}>
+          <div>
+            <label className={s.label} htmlFor="name">
+              Name
+            </label>
+            <Field className={s.input} type="text" name="name" id="name" />
+            {errors.name && touched.name && <div>{errors.name}</div>}
+          </div>
 
-        <div>
-          <label className={s.label} htmlFor={nameFieldId}>
-            Number
-          </label>
-          <Field
-            className={s.input}
-            type="text"
-            name="number"
-            id={numberFieldId}
-          />
-          <ErrorMessage name="number" as="span" />
-        </div>
-        <button type="submit" className={s.btn}>
-          Add contact
-        </button>
-      </Form>
+          <div>
+            <label className={s.label} htmlFor="number">
+              Number
+            </label>
+            <Field className={s.input} type="text" name="number" id="number" />
+            {errors.number && touched.number && <div>{errors.number}</div>}
+          </div>
+          <button type="submit" className={s.btn}>
+            Add contact
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };
-
 export default ContactForm;
