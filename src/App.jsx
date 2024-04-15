@@ -7,8 +7,8 @@ import {
   addContact,
   deleteContact,
   selectContacts,
-  selectFilter,
 } from "./redux/Contacts/slice";
+import { selectFilter } from "./redux/filtersSlice";
 
 const App = () => {
   const contacts = useSelector(selectContacts);
