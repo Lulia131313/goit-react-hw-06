@@ -46,11 +46,7 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm addContacts={addContacts} />
       <SearchBox filteredContacts={filteredContacts} />
-      <ContactList
-        contacts={filteredData}
-        deleteContact={handleDelete}
-        filteredContacts={filteredContacts}
-      />
+      <ContactList contacts={filteredData} onDelete={handleDelete} />
     </div>
   );
 };
