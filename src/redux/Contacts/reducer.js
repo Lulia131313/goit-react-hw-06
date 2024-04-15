@@ -1,5 +1,5 @@
 import contactData from "../../task.json";
-import { ADD_CONTACT, DELETE_CONTACT } from "./constants";
+import { ADD_CONTACT, CHANGE_SEARCH_STR, DELETE_CONTACT } from "./constants";
 
 const initialState = {
   contacts: contactData,
@@ -17,6 +17,11 @@ export const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         contacts: [...state.contacts, action.payload],
+      };
+    case CHANGE_SEARCH_STR:
+      return {
+        ...state,
+        filter: action.payload,
       };
     default:
       return state;
