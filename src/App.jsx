@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
-import task from "./task.json";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContacts, selectFilter } from "./redux/Contacts/selector";
-import { addContact, deleteContact } from "./redux/Contacts/actions";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import {
+  addContact,
+  deleteContact,
+  selectContacts,
+  selectFilter,
+} from "./redux/Contacts/slice";
 
 const App = () => {
   const contacts = useSelector(selectContacts);
@@ -19,7 +21,14 @@ const App = () => {
   };
 
   const addContacts = (contact) => {
+    const isExist = contacts.some(
+      (item) => item.name === contact.name && item.number === contact.number
+    );
+    if (isExist) {
+      return toast.error("This book already exist!");
+    }
     dispatch(addContact(contact));
+    toast.success("Book was added! 🔥");
   };
 
   const getFilteredData = () => {
@@ -29,6 +38,7 @@ const App = () => {
         item.number.toLowerCase().includes(filteredContacts.toLowerCase())
     );
   };
+
   const filteredData = getFilteredData();
 
   return (
@@ -36,7 +46,11 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm addContacts={addContacts} />
       <SearchBox filteredContacts={filteredContacts} />
-      <ContactList contacts={filteredData} deleteContact={handleDelete} />
+      <ContactList
+        contacts={filteredData}
+        deleteContact={handleDelete}
+        filteredContacts={filteredContacts}
+      />
     </div>
   );
 };
