@@ -1,17 +1,17 @@
 import { useState } from "react";
 import s from "./SearchBox.module.css";
 import { useDispatch } from "react-redux";
-import { changeSearchStr } from "../../redux/filtersSlice";
+import { changeFilter } from "../../redux/filtersSlice";
 
 const SearchBox = ({ filteredContacts }) => {
   const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
-    dispatch(changeSearchStr(e.target.value));
+    dispatch(changeFilter(e.target.value));
   };
 
   const handleReset = () => {
-    dispatch(changeSearchStr(""));
+    dispatch(changeFilter(""));
   };
 
   return (

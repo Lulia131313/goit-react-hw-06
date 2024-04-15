@@ -7,12 +7,12 @@ import {
   addContact,
   deleteContact,
   selectContacts,
-} from "./redux/Contacts/slice";
-import { selectFilter } from "./redux/filtersSlice";
+} from "./redux/contactsSlice";
+import { selectNameFilter } from "./redux/filtersSlice";
 
 const App = () => {
   const contacts = useSelector(selectContacts);
-  const filteredContacts = useSelector(selectFilter);
+  const filteredContacts = useSelector(selectNameFilter);
 
   const dispatch = useDispatch();
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import contactData from "../../task.json";
+import contactData from "../task.json";
 
 const initialState = {
   contacts: contactData,
@@ -24,4 +24,3 @@ const slice = createSlice({
 export const contactReducer = slice.reducer;
 export const { addContact, deleteContact } = slice.actions;
 export const { selectContacts } = slice.selectors;
-// export const selectFilter = (state) => state.filter;
