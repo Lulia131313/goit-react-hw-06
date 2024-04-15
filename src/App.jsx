@@ -22,20 +22,21 @@ const App = () => {
     dispatch(addContact(contact));
   };
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("contacts", JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // const filteredContacts = contacts.filter((item) =>
-  //   item.name.toLowerCase().includes(inputValue.toLowerCase())
-  // );
+  const getFilteredData = () => {
+    return contacts.filter(
+      (item) =>
+        item.name.toLowerCase().includes(filteredContacts.toLowerCase()) ||
+        item.number.toLowerCase().includes(filteredContacts.toLowerCase())
+    );
+  };
+  const filteredData = getFilteredData();
 
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm addContacts={addContacts} />
-      <SearchBox value={0} />
-      <ContactList contacts={contacts} deleteContact={handleDelete} />
+      <SearchBox filteredContacts={filteredContacts} />
+      <ContactList contacts={filteredData} deleteContact={handleDelete} />
     </div>
   );
 };
