@@ -5,12 +5,11 @@ const initialState = {
   contacts: contactData,
 };
 
+export const selectContacts = (state) => state.contacts.contacts;
+
 const slice = createSlice({
   name: "contacts",
   initialState,
-  selectors: {
-    selectContacts: (state) => state.contacts,
-  },
   reducers: {
     addContact: (state, { payload }) => {
       state.contacts.push(payload);
@@ -23,4 +22,3 @@ const slice = createSlice({
 
 export const contactReducer = slice.reducer;
 export const { addContact, deleteContact } = slice.actions;
-export const { selectContacts } = slice.selectors;
